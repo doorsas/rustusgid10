@@ -5,6 +5,7 @@ from . import views
 
 
 urlpatterns = [
-    path('', views.oras, name= 'oras')
+    path('', views.oras, name= 'oras'),
+    path('temperatura/', views.oro_temperatura, name= 'oro_temperatura')
 ]
 
