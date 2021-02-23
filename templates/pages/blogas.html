@@ -1,0 +1,19 @@
+{% extends '_base.html' %}
+{% load static %}
+
+{% block title %}Blogas{% endblock title %}
+
+{% block content %}
+
+<h1> Straipsniai :</h1>
+<br/>
+{% for post in object_list %}
+    <li><a href="{% url 'article-detail' post.pk %}">{{ post.title }}</a> - {{ post.author.first_name }} {{ post.post_date|date:'Y-m-d ' }}
+        - <small><a href = "{% url 'update-post' post.pk %}" > (Redaguoti) </a></small>
+         <small><a href = "{% url 'delete-post' post.pk %}" > (Ištrinti) </a></small> <br/>
+    </li>
+    <br/>
+{% endfor %}
+
+
+{% endblock content %}

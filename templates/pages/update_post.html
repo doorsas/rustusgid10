@@ -1,0 +1,19 @@
+{% extends '_base.html' %}
+{% load static %}
+
+{% block title %}Edit Post{% endblock title %}
+
+{% block content %}
+
+<h1> Redaguoti straipsnį</h1>
+
+<div class="form-group">
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn btn-danger">Redaguoti</button>
+    </form>
+</div>
+
+
+{% endblock content %}
