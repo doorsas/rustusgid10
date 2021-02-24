@@ -7,8 +7,13 @@
 <div class="container-fluid">
   <div class="row">
     <h1> bego vaikai per girele</h1>
-      <p>tram pam pam pam pam tram pam pam pam pam tram pam pam pam pam tram pam pam pam pam tram pam pam pam pam tram pam pam pam pam </p>
+    {% for autorius in object_list %}
+       <p>tram pam pam pam pam tram pam pam pam pam tram pam pam pam pam tram pam pam pam pam tram pam pam pam pam tram pam pam pam pam </p>
       <p>tram pam pam pam pam tram pam pam pam pam tram pam pam pam pam tram pam pam pam pam tram pam pam pam pam tram pam pam pam pam</p>
+      <p>{{ autorius.klausimo_antraste }} </p>
+    {% endfor %}
+
+
   </div>
 </div>
 
