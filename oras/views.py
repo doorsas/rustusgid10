@@ -26,6 +26,7 @@ def oras(request):
             'temperature': r['forecastTimestamps'][0]['airTemperature'],
             'description': r['forecastTimestamps'][0]['windSpeed'],
             'vejo_greitis': r['forecastTimestamps'][0]['windSpeed'],
+            'dregme' : r['forecastTimestamps'][0]['relativeHumidity'],
         }
 
         weather_data.append(city_weather)
@@ -60,16 +61,18 @@ def index(request):
     for city in cities:
 
         r = requests.get(url.format(city)).json()
-
+        print (r['forecastTimestamps'][0]['relativeHumidity'])
         city_weather = {
             'city' : city.name,
             'temperature' : r['forecastTimestamps'][0]['airTemperature'],
             'description' : r['forecastTimestamps'][0]['windSpeed'],
             'vejo_greitis' : r['forecastTimestamps'][0]['windSpeed'],
+            'dregme' : r['forecastTimestamps'][0]['relativeHumidity'],
         }
 
         weather_data.append(city_weather)
         print (weather_data)
+        print ('kiskis')
     context = {'weather_data' : weather_data, 'form' : form}
     return render(request, 'oras/oro_prognoze.html', context)
 
