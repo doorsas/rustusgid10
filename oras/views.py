@@ -6,7 +6,32 @@ from .forms import CityForm
 
 
 def oras(request):
-    return render(request, 'oras/oras.html', {})
+    url = 'https://api.meteo.lt/v1/places/{}/forecasts/long-term'
+
+    if request.method == 'POST':
+        form = CityForm(request.POST)
+        form.save()
+
+    form = CityForm()
+
+    cities = City.objects.all()
+
+    weather_data = []
+
+    for city in cities:
+        r = requests.get(url.format(city)).json()
+
+        city_weather = {
+            'city': city.name,
+            'temperature': r['forecastTimestamps'][0]['airTemperature'],
+            'description': r['forecastTimestamps'][0]['windSpeed'],
+            'vejo_greitis': r['forecastTimestamps'][0]['windSpeed'],
+        }
+
+        weather_data.append(city_weather)
+        print(weather_data)
+    context = {'weather_data': weather_data, 'form': form}
+    return render(request, 'oras/oras.html', context)
 
 # def oro_temperatura(request):
 #     return render(request, 'oras/oro_temperatura.html', {})
@@ -40,7 +65,7 @@ def index(request):
             'city' : city.name,
             'temperature' : r['forecastTimestamps'][0]['airTemperature'],
             'description' : r['forecastTimestamps'][0]['windSpeed'],
-            'icon' : r['forecastTimestamps'][0]['relativeHumidity'],
+            'vejo_greitis' : r['forecastTimestamps'][0]['windSpeed'],
         }
 
         weather_data.append(city_weather)

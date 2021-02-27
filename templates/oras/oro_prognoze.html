@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -44,6 +45,7 @@
         <div class="container">
             <div class="columns">
                 <div class="column is-offset-4 is-4">
+                    {% for city_weather in weather_data %}
                     <div class="box">
                         <article class="media">
                             <div class="media-left">
@@ -56,13 +58,15 @@
                                     <p>
                                         <span class="title">{{ city_weather.city }}</span>
                                         <br>
-                                        <span class="subtitle">29° F</span>
-                                        <br> thunderstorm with heavy rain
+                                        <span class="subtitle">{{city_weather.temperature }} laipsniai C</span>
+                                        <br> {{city_weather.vejo_greitis }} m/s
+                                        <br>
                                     </p>
                                 </div>
                             </div>
                         </article>
                     </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>
