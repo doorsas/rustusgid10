@@ -23,3 +23,15 @@ class Klausimai(models.Model):
         return reverse('oro_temperatura', kwargs={"pk": str(self.pk)})
         # return reverse('blogas')
         # return reverse('article-detail', [self.id,])
+
+
+
+
+class City(models.Model):
+    name = models.CharField(max_length=25)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name_plural = 'cities'

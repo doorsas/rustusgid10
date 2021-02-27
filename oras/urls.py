@@ -7,6 +7,7 @@ from .views import KlausimaiPageView
 
 urlpatterns = [
     path('', views.oras, name= 'oras'),
-    path('temperatura/', KlausimaiPageView.as_view(), name= 'oro_temperatura')
+    path('temperatura/', KlausimaiPageView.as_view(), name= 'oro_temperatura'),
+    path('prognoze/', views.index, name= 'prognoze')
 ]
 
