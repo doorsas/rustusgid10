@@ -10,7 +10,28 @@ def oras(request):
 
     if request.method == 'POST':
         form = CityForm(request.POST)
-        form.save()
+
+        if form.is_valid():
+            new_city = form.cleaned_data['name']
+            existing_city_count = City.objects.filter(name = new_city).count()
+
+            if existing_city_count == 0:
+                r = requests.get(url.format(new_city)).json()
+                print (len(r))
+                if len(r) == 1:
+                    err_msg = "Nėra tokio miesto"
+                else:
+                    form.save()
+            else:
+                err_msg = "Toks miestas jau pridėtas"
+        if err_msg:
+            message = err_msg
+            message_class = 'is-danger'
+        else:
+            message = "Miestas sėkmingai pridėtas"
+            message_class = 'is-success'
+
+
 
     form = CityForm()
 
@@ -27,10 +48,11 @@ def oras(request):
             'description': r['forecastTimestamps'][0]['windSpeed'],
             'vejo_greitis': r['forecastTimestamps'][0]['windSpeed'],
             'dregme' : r['forecastTimestamps'][0]['relativeHumidity'],
+            'message': message,
         }
 
         weather_data.append(city_weather)
-        print(weather_data)
+        # print(weather_data)
     context = {'weather_data': weather_data, 'form': form}
     return render(request, 'oras/oras.html', context)
 
