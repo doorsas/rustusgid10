@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Klausimai, City
 from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView
 import requests
@@ -7,6 +7,11 @@ from .forms import CityForm
 
 def oras(request):
     url = 'https://api.meteo.lt/v1/places/{}/forecasts/long-term'
+
+    err_msg = ''
+    message = ''
+    message_class = ''
+
 
     if request.method == 'POST':
         form = CityForm(request.POST)
@@ -48,12 +53,18 @@ def oras(request):
             'description': r['forecastTimestamps'][0]['windSpeed'],
             'vejo_greitis': r['forecastTimestamps'][0]['windSpeed'],
             'dregme' : r['forecastTimestamps'][0]['relativeHumidity'],
-            'message': message,
+
         }
 
         weather_data.append(city_weather)
         # print(weather_data)
-    context = {'weather_data': weather_data, 'form': form}
+    context = {
+        'weather_data': weather_data,
+        'form': form,
+        'message': message,
+        'message_class' : message_class,
+                }
+
     return render(request, 'oras/oras.html', context)
 
 # def oro_temperatura(request):
@@ -69,10 +80,35 @@ class KlausimaiPageView(ListView):
 def index(request):
     url = 'https://api.meteo.lt/v1/places/{}/forecasts/long-term'
 
+    err_msg = ''
+    message = ''
+    message_class = ''
+
 
     if request.method == 'POST':
         form = CityForm(request.POST)
-        form.save()
+
+        if form.is_valid():
+            new_city = form.cleaned_data['name']
+            existing_city_count = City.objects.filter(name = new_city).count()
+
+            if existing_city_count == 0:
+                r = requests.get(url.format(new_city)).json()
+                print (len(r))
+                if len(r) == 1:
+                    err_msg = "Nėra tokio miesto"
+                else:
+                    form.save()
+            else:
+                err_msg = "Toks miestas jau pridėtas"
+        if err_msg:
+            message = err_msg
+            message_class = 'is-danger'
+        else:
+            message = "Miestas sėkmingai pridėtas"
+            message_class = 'is-success'
+
+
 
     form = CityForm()
 
@@ -81,22 +117,32 @@ def index(request):
     weather_data = []
 
     for city in cities:
-
         r = requests.get(url.format(city)).json()
-        print (r['forecastTimestamps'][0]['relativeHumidity'])
+
         city_weather = {
-            'city' : city.name,
-            'temperature' : r['forecastTimestamps'][0]['airTemperature'],
-            'description' : r['forecastTimestamps'][0]['windSpeed'],
-            'vejo_greitis' : r['forecastTimestamps'][0]['windSpeed'],
+            'city': city.name,
+            'temperature': r['forecastTimestamps'][0]['airTemperature'],
+            'description': r['forecastTimestamps'][0]['windSpeed'],
+            'vejo_greitis': r['forecastTimestamps'][0]['windSpeed'],
             'dregme' : r['forecastTimestamps'][0]['relativeHumidity'],
+
         }
 
         weather_data.append(city_weather)
-        print (weather_data)
-        print ('kiskis')
-    context = {'weather_data' : weather_data, 'form' : form}
+        # print(weather_data)
+    context = {
+        'weather_data': weather_data,
+        'form': form,
+        'message': message,
+        'message_class' : message_class,
+                }
+
     return render(request, 'oras/oro_prognoze.html', context)
+
+
+def delete_city(request, city_name):
+    City.objects.get(name=city_name).delete()
+    return redirect('oras')
 
 # def gautiprognoze():
 #     url = 'https://api.meteo.lt/v1/places/{}/forecasts/long-term'
