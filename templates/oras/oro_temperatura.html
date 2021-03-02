@@ -1,18 +1,21 @@
 {% extends '_base.html' %}
 
-{% block title %}Apie{% endblock %}
+{% block title %}Klausimai{% endblock %}
 
 {% block content %}
 
 <div class="container-fluid">
-  <div class="row">
-    <h1> bego vaikai per girele</h1>
-    {% for autorius in object_list %}
-       <p>tram pam pam pam pam tram pam pam pam pam tram pam pam pam pam tram pam pam pam pam tram pam pam pam pam tram pam pam pam pam </p>
-      <p>tram pam pam pam pam tram pam pam pam pam tram pam pam pam pam tram pam pam pam pam tram pam pam pam pam tram pam pam pam pam</p>
-      <p>{{ autorius.klausimo_antraste }} </p>
-    {% endfor %}
-
+  <div class ='container' >
+      <div class="row">
+          <h1> bego vaikai per girele</h1>
+        <div>
+          {% for autorius in object_list %}
+        <p>{{ autorius.klausimo_antraste }} </p>
+         <br>
+          {% endfor %}
+        </div>
+    <span class="label">Default</span>
+  </div>
 
   </div>
 </div>

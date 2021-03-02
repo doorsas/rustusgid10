@@ -70,12 +70,25 @@ def oras(request):
 # def oro_temperatura(request):
 #     return render(request, 'oras/oro_temperatura.html', {})
 
+
+
+
 class KlausimaiPageView(ListView):
     template_name = 'oras/oro_temperatura.html'
     model = Klausimai
 
 # class PrognozePageView(TemplateView):
 #     template_name = 'oras/oro_prognoze.html'
+
+
+def kamuolys(request):
+    return render(request, 'oras/kamuolys.html')
+
+
+
+def chess(request):
+    return render(request, 'oras/chess.html')
+
 
 def index(request):
     url = 'https://api.meteo.lt/v1/places/{}/forecasts/long-term'

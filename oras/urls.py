@@ -9,6 +9,8 @@ urlpatterns = [
     path('', views.oras, name= 'oras'),
     path('temperatura/', KlausimaiPageView.as_view(), name= 'oro_temperatura'),
     path('prognoze/', views.index, name= 'prognoze'),
-    path('delete/<city_name>', views.delete_city, name= 'delete_city')
+    path('delete/<city_name>', views.delete_city, name= 'delete_city'),
+    path('kamuolys/', views.kamuolys, name= 'kamuolys'),
+    path('chess/', views.chess, name= 'chess')
 ]
 
