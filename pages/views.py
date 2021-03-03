@@ -26,12 +26,11 @@ class HomeView(ListView):
     model = Post
     template_name = 'pages/blogas.html'
     ordering = ['-id']
+    context_object_name = 'straipsniai'
 
 class ArticleDetailView(DetailView):
     model = Post
     template_name = 'pages/article_details.html'
-
-
 
 
 class HomePageView(TemplateView):

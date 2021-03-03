@@ -3,6 +3,11 @@ html {
   min-height: 100%;
   font-size: 14px;
 }
+.container {
+  max-width: 960px;
+}
+
+
 .yinyang {
   background: linear-gradient(to right, #43F0A1, #43F0A1 50%, #C55BF0 50%, #C55BF0);
   /* Adjust the following three values to change the size */

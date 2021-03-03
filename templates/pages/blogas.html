@@ -7,13 +7,15 @@
 
 <h1> Straipsniai :</h1>
 <br/>
-{% for post in object_list %}
+{% for post in straipsniai %}
     <li><a href="{% url 'article-detail' post.pk %}">{{ post.title }}</a> - {{ post.author.first_name }} {{ post.post_date|date:'Y-m-d ' }}
         - <small><a href = "{% url 'update-post' post.pk %}" > (Redaguoti) </a></small>
          <small><a href = "{% url 'delete-post' post.pk %}" > (Ištrinti) </a></small> <br/>
     </li>
     <br/>
 {% endfor %}
-
+<div>
+    <a class="p-2 text-dark" href="{% url 'add-post' %}">Rašyti naują straipsnį</a>
+</div>
 
 {% endblock content %}

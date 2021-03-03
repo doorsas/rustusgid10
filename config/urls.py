@@ -11,6 +11,7 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')),
     path('', include('pages.urls')),
     path('oras/', include('oras.urls')),
+    path('technikosnuoma/', include('technikosnuoma.urls'))
 ]
 
 if settings.DEBUG:
