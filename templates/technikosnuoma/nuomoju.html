@@ -6,6 +6,21 @@
 {% block content %}
 <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
   <img src="{% static 'images/logo.png' %}" class="img-fluid" alt="DjangoX logo"/>
-  <p class="lead">Nuomoju</p>
+  <p class="lead">Noriu išnuomoti</p>
 </div>
+
+<h1> Technika</h1>
+<br/>
+{% for post in visatechnika %}
+    <li><a href="{% url 'technika_detaliau' post.pk %}">{{ post.title }}</a> - {{ post.author.first_name }} {{ post.post_date|date:'Y-m-d ' }}
+        - <small><a href = "{% url 'update-post' post.pk %}" > (Redaguoti) </a></small>
+         <small><a href = "{% url 'delete-post' post.pk %}" > (Ištrinti) </a></small> <br/>
+    </li>
+    <br/>
+{% endfor %}
+<div>
+    <a class="p-2 text-dark" href="{% url 'add-post' %}">Rašyti naują straipsnį</a>
+</div>
+
+
 {% endblock content %}
