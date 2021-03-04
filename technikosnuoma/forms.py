@@ -8,7 +8,7 @@ class TechnikaForm(forms.ModelForm):
         widgets = {
             'title': forms.TextInput( attrs={'class': 'form-control'}),
             'title_tag': forms.TextInput( attrs={'class': 'form-control'}),
-            'author': forms.TextInput( attrs={'class': 'form-control'}),
+            'author': forms.Select( attrs={'class': 'form-control'}),
             'body': forms.TextInput( attrs={'class': 'form-control'}),
             'operatorius': forms.TextInput( attrs={'class': 'form-control'}),
             'webpuslapis': forms.URLInput(attrs={'class': 'form-control'}),

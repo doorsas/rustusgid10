@@ -12,9 +12,7 @@ class Technika(models.Model):
     post_date = models.DateField(auto_now_add=True)
     webpuslapis = models.URLField()
     epastas = models.EmailField(blank=True)
-    nuotrauka = models.ImageField(upload_to='technika/',blank=True, width_field='image_width', height_field='image_height')
-    image_width = models.IntegerField(verbose_name= 'aukstis')
-    image_height = models.IntegerField(verbose_name= 'plotis')
+    nuotrauka = models.ImageField(upload_to='technika/',blank=True)
     kontaktas = models.CharField(max_length=50,verbose_name= 'Telefonas' )
 
     class Meta:
