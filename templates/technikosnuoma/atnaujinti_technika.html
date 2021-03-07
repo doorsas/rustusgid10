@@ -1,17 +1,17 @@
 {% extends '_base.html' %}
 {% load static %}
 
-{% block title %}{{ post.title_tag }}{% endblock title %}
+{% block title %}Redaguoti techniką {% endblock title %}
 
 {% block content %}
 
-<h1> Pridėti technika</h1>
+<h1> Redaguoti techniką</h1>
 
 <div class="form-group">
     <form enctype="multipart/form-data" method="POST">
         {% csrf_token %}
         {{ form.as_p }}
-        <button class="btn btn-danger">Publikuoti</button>
+        <button class="btn btn-danger">Redaguoti</button>
     </form>
 </div>
 

@@ -10,11 +10,9 @@ class Technika(models.Model):
     operatorius = models.BooleanField(verbose_name= 'Ar su operatorium ?')
     body = models.TextField(verbose_name= 'Aprašymas',default='Aprašymas')
     post_date = models.DateField(auto_now_add=True)
-    webpuslapis = models.URLField()
+    webpuslapis = models.URLField(blank=True)
     epastas = models.EmailField(blank=True)
-    nuotrauka = models.ImageField(upload_to='technika/',blank=True, width_field='image_width', height_field='image_height')
-    image_width = models.IntegerField(verbose_name= 'aukstis')
-    image_height = models.IntegerField(verbose_name= 'plotis')
+    nuotrauka = models.ImageField(blank=True, null=True)
     kontaktas = models.CharField(max_length=50,verbose_name= 'Telefonas' )
 
     class Meta:
@@ -24,8 +22,8 @@ class Technika(models.Model):
         return self.title + ' | ' + str(self.author)
 
     def get_absolute_url(self):
-        # print (reverse(str(self.id)))
+
         return reverse('technika_detaliau', kwargs={"pk": str(self.pk)})
         # return reverse('blogas')
-        # return reverse('article-detail', [self.id,])
+
 

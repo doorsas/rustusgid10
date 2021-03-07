@@ -5,7 +5,8 @@
 
 {% block content %}
 <h1> {{ technika.title}}</h1>
-<p>{{ technika.author.first_name }} {{ technika.post_date|date:'Y-m-d ' }} <small><a href = "#" > (Redaguoti) </a><a href = "#" > (Ištrinti) </a></small> </p>
+<p>{{ technika.author.first_name }} {{ technika.post_date|date:'Y-m-d ' }} <small><a href = "{% url 'edit_technika' technika.pk %}" > (Redaguoti) </a><a href = "{% url 'delete_technika' technika.pk %}" > (Ištrinti) </a></small> </p>
+
 
 
 

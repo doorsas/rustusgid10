@@ -13,8 +13,12 @@
 <br/>
 {% for post in visatechnika %}
     <li><a href="{% url 'technika_detaliau' post.pk %}">{{ post.title }}</a> - {{ post.author.first_name }} {{ post.post_date|date:'Y-m-d ' }}
-        - <small><a href = "{% url 'update-post' post.pk %}" > (Redaguoti) </a></small>
-         <small><a href = "{% url 'delete-post' post.pk %}" > (Ištrinti) </a></small> <br/>
+        - <small><a href = "{% url 'edit_technika' post.pk %}" > (Redaguoti) </a></small>
+         <small><a href = "{% url 'delete_technika' post.pk %}" > (Ištrinti) </a></small> <br/>
+        {% if post.nuotrauka %}
+        <img src="{% static 'images/logo.png' %}" class="img-fluid" alt="DjangoX logo"/>
+        {% endif %}
+
     </li>
     <br/>
 {% endfor %}

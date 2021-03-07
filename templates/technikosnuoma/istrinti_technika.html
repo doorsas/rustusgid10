@@ -1,0 +1,19 @@
+{% extends '_base.html' %}
+{% load static %}
+
+{% block title %}Ištrinti techniką{% endblock title %}
+
+{% block content %}
+
+<h1> Ištrinti skelbimą</h1>
+<h3> Ištrinti skelbimą {{ technika.title }}</h3>
+<div enctype="multipart/form-data" class="form-group">
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn btn-danger">Ištrinti !!!</button>
+    </form>
+</div>
+
+
+{% endblock content %}

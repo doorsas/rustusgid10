@@ -1,4 +1,5 @@
 from pathlib import Path
+import os
 
 # GENERAL
 # ------------------------------------------------------------------------------
@@ -133,6 +134,11 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [str(BASE_DIR.joinpath('static'))]
 # http://whitenoise.evans.io/en/stable/django.html#add-compression-and-caching-support
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
+MEDIA_URL = '/images/'
+
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
 
 # DJANGO-CRISPY-FORMS CONFIGS
 # ------------------------------------------------------------------------------
